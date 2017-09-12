@@ -1,0 +1,26 @@
+{
+  "name": "js-state-handler",
+  "version": "0.0.1",
+  "description": "A renderable state handler for states outside of frameworks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdbch/js-state-handler.git"
+  },
+  "keywords": [
+    "js",
+    "es6",
+    "module",
+    "state",
+    "states"
+  ],
+  "author": "bdbch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bdbch/js-state-handler/issues"
+  },
+  "homepage": "https://github.com/bdbch/js-state-handler#readme"
+}
