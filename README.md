@@ -108,5 +108,5 @@ Since I used it in multiple components, I had to copy it over and over to the po
 
 ## Todo
 
-* [] Bind relations between states and functions to allow specific rendering
-* [] Allow usage outside of ES6 via CommonJS
+* [ ] Bind relations between states and functions to allow specific rendering
+* [ ] Allow usage outside of ES6 via CommonJS
