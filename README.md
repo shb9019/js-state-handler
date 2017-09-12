@@ -2,7 +2,7 @@
 
 > A simple state handler with rendering functionality
 
-## Installation
+# Installation
 
 JS State Handler can be installed via npm
 
@@ -10,7 +10,7 @@ JS State Handler can be installed via npm
 npm install js-state-handler --save
 ```
 
-## Usage
+# Usage
 
 JS State Handler can be used in ES6 modules via `import`.
 
@@ -98,6 +98,75 @@ class Organisation {
     this.closedValue.innerHTML = text
   }
 }
+```
+
+# Accessing the State
+
+You can always access all state values via `StateHandler.state` like that.
+
+```js
+import StateHandler from 'js-state-handler'
+
+const MyState = new StateHandler({
+  apples: 0
+})
+
+function addApple () {
+  MyState.setState({
+    apples: MyState.state.apples++
+  })
+}
+```
+
+# Other Functions
+
+All functions can be access from the `StateHandler` class directly.
+
+#### `StateHandler.renderCurrentState()`
+> Renders all functions of the current state
+
+```js
+MyState.renderCurrentState()
+```
+
+---
+
+#### `StateHandler.setState(object)`
+> Overwrites state keys with new values
+
+```js
+MyState.setState({
+  apple: 1,
+  banana: 5
+})
+```
+
+---
+
+#### `StateHandler.addFunctionToRenderer(function or array)`
+> Adds a single function or an array of functions to the renderer
+
+```js
+function doSomething () {
+  // do stuff
+}
+
+function doSomethingElse () {
+  // do something else
+}
+
+function beAwesome () {
+  // i am awesome
+}
+
+// Add a single function
+MyState.addFunctionToRenderer(doSomething)
+
+// Add multiple functions
+MyState.addFunctionToRenderer([
+  doSomethingElse,
+  beAwesome
+])
 ```
 
 ## Why?
