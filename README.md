@@ -12,43 +12,6 @@ npm install js-state-handler --save
 
 # Usage
 
-JS State Handler can be used in CommonJS like this.
-```html
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <!-- your head -->
-  </head>
-  <body>
-    <!-- your body -->
-    <div id="counter-value"></div>
-    <button onclick="incrementCounter">+</button>
-
-    <script src="path/to/state-handler.js"></script>
-    <script>
-      var counterValue = document.getElementById('counter-value')
-
-      var State = new StateHandler({
-        counter: 0
-      }, [
-        renderCounter
-      ]);
-
-      function incrementCounter () {
-        var currentCount = State.get('counter')
-        State.set({
-          counter: currentCounter++
-        })
-      }
-
-      function renderCounter () {
-        counterValue.innerHTML = State.get('counter')
-      }
-    </script>
-  </body>
-</html>
-```
-
 JS State Handler can be used in ES6 modules via `import`.
 
 #### Basic Usage
@@ -233,4 +196,3 @@ Since I used it in multiple components, I had to copy it over and over to the po
 ## Todo
 
 * [ ] Bind relations between states and functions to allow specific rendering
-* [x] ~~Allow usage outside of ES6 via CommonJS~~
