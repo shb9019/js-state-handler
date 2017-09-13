@@ -1,8 +1,8 @@
 {
   "name": "js-state-handler",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A renderable state handler for states outside of frameworks",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "compile": "babel --presets es2015,stage-0 -d dist/ src/",
     "prepublish": "npm run compile",
