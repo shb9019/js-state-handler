@@ -17,7 +17,7 @@ var StateHandler = function () {
 
     _classCallCheck(this, StateHandler);
 
-    this.state = initialState || {};
+    this._state = initialState || {};
     this.functions = [];
 
     if (initialFn) {
@@ -26,14 +26,26 @@ var StateHandler = function () {
   }
 
   _createClass(StateHandler, [{
-    key: 'setState',
-    value: function setState(newState) {
-      Object.assign(this.state, newState);
-      this.renderNewState();
+    key: 'set',
+    value: function set(newState) {
+      Object.assign(this._state, newState);
+      this.render();
     }
   }, {
-    key: 'renderNewState',
-    value: function renderNewState() {
+    key: 'get',
+    value: function get() {
+      var key = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      if (!key) {
+        return this._state;
+      }
+
+      var value = this._state[key] ? this._state[key] : false;
+      return value;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
@@ -60,8 +72,8 @@ var StateHandler = function () {
       }
     }
   }, {
-    key: 'addFunctionToRenderer',
-    value: function addFunctionToRenderer() {
+    key: 'addToRenderer',
+    value: function addToRenderer() {
       var fn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
       if (!fn && typeof fn !== 'function' && (typeof fn === 'undefined' ? 'undefined' : _typeof(fn)) !== 'object') {
