@@ -113,7 +113,7 @@ const State = new StateHandler({
 
 function addApple () {
   State.set({
-    apples: MyState.state.apples++
+    apples: State.state.apples++
   })
 }
 
@@ -178,10 +178,10 @@ function beAwesome () {
 }
 
 // Add a single function
-MyState.addToRenderer(doSomething)
+State.addToRenderer(doSomething)
 
 // Add multiple functions
-MyState.addToRenderer([
+State.addToRenderer([
   doSomethingElse,
   beAwesome
 ])
