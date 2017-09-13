@@ -21,7 +21,7 @@ var StateHandler = function () {
     this.functions = [];
 
     if (initialFn) {
-      this.addFunctionToRenderer(initialFn);
+      this.addToRenderer(initialFn);
     }
   }
 
