@@ -4,7 +4,7 @@ export default class StateHandler {
     this.functions = []
 
     if (initialFn) {
-      this.addFunctionToRenderer(initialFn)
+      this.addToRenderer(initialFn)
     }
   }
 
