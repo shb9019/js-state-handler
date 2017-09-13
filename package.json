@@ -1,9 +1,11 @@
 {
   "name": "js-state-handler",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A renderable state handler for states outside of frameworks",
   "main": "index.js",
   "scripts": {
+    "compile": "babel --presets es2015,stage-0 -d dist/ src/",
+    "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/bdbch/js-state-handler/issues"
   },
-  "homepage": "https://github.com/bdbch/js-state-handler#readme"
+  "homepage": "https://github.com/bdbch/js-state-handler#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  }
 }
