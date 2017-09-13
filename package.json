@@ -1,6 +1,6 @@
 {
   "name": "js-state-handler",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A renderable state handler for states outside of frameworks",
   "main": "dist/index.js",
   "scripts": {

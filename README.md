@@ -20,21 +20,21 @@ JS State Handler can be used in ES6 modules via `import`.
 import StateHandler from 'js-state-handler'
 
 // Create
-const MyStateHandler = new StateHandler({
+const State = new StateHandler({
   loading: true,
   name: 'Peter'
 })
 
 // This function will handling the rendering of a new person
 function renderPerson () {
-  const name = MyStateHandler.state.name
+  const name = State.get('name')
   document.getElementById('person').innerHTML = name
 }
 
 // This function will handling the rendering of the loader
 function renderLoader () {
   const loader = document.getElementById('loader')
-  const isLoading = MyStateHandler.state.loading
+  const isLoading = State.get('loading')
   const displayStyle = (isLoading) ? 'block' : 'none'
 
   loader.style.display = displayStyle
@@ -42,14 +42,14 @@ function renderLoader () {
 
 // add the defined functions to the StateHandler
 // these functions will run as soon as the state is changed
-MyStateHandler.addFunctionToRenderer([renderPerson, renderLoader])
+State.addToRenderer([renderPerson, renderLoader])
 
 // Initial render
-MyStateHandler.renderNewState()
+State.render()
 
 // Update the state as soon as the window finished loading
 window.addEventListener('load', function () {
-  MyStateHandler.setState({
+  State.set({
     loading: false,
     name: 'Louis'
   })
@@ -69,7 +69,7 @@ class Organisation {
     this.openNow = document.getElementById('open-now-button')
 
     // Initialise the StateHandler and add this.renderClosedState to the render functions
-    this.stateHandler = new StateHandler({
+    this.State = new StateHandler({
       closed: false
     }, [ this.renderClosedState ])
 
@@ -80,21 +80,21 @@ class Organisation {
 
   // Run on close click
   close = () => {
-    this.stateHandler.setState({
+    this.State.set({
       closed: true
     })
   }
 
   // Run on open click
   open = () => {
-    this.stateHandler.setState({
+    this.State.set({
       closed: false
     })
   }
 
   // This will be run by the StateHandler since we added it in the constructor
   renderClosedState = () => {
-    const text = (this.stateHandler.state.closed) ? 'Closed' : 'Open'
+    const text = (this.state.get('closed')) ? 'Closed' : 'Open'
     this.closedValue.innerHTML = text
   }
 }
@@ -102,19 +102,27 @@ class Organisation {
 
 # Accessing the State
 
-You can always access all state values via `StateHandler.state` like that.
+You can always access all state values via `StateHandler.get()` like that.
 
 ```js
 import StateHandler from 'js-state-handler'
 
-const MyState = new StateHandler({
+const State = new StateHandler({
   apples: 0
 })
 
 function addApple () {
-  MyState.setState({
+  State.set({
     apples: MyState.state.apples++
   })
+}
+
+function getAllValues () {
+  return State.get()  // returns all values saved into the state
+}
+
+function getApples () {
+  return State.get('apples')  // returns only the apples-value
 }
 ```
 
@@ -122,20 +130,30 @@ function addApple () {
 
 All functions can be access from the `StateHandler` class directly.
 
-#### `StateHandler.renderCurrentState()`
+#### `StateHandler.render()`
 > Renders all functions of the current state
 
 ```js
-MyState.renderCurrentState()
+State.render()
 ```
 
 ---
 
-#### `StateHandler.setState(object)`
+#### `StateHandler.get(key[optional])`
+> Get the state or single values via key
+
+```js
+State.get() // get all values
+State.get('persons') // get "persons" value
+```
+
+---
+
+#### `StateHandler.set(object)`
 > Overwrites state keys with new values
 
 ```js
-MyState.setState({
+State.set({
   apple: 1,
   banana: 5
 })
@@ -143,7 +161,7 @@ MyState.setState({
 
 ---
 
-#### `StateHandler.addFunctionToRenderer(function or array)`
+#### `StateHandler.addToRenderer(function or array)`
 > Adds a single function or an array of functions to the renderer
 
 ```js
@@ -160,10 +178,10 @@ function beAwesome () {
 }
 
 // Add a single function
-MyState.addFunctionToRenderer(doSomething)
+MyState.addToRenderer(doSomething)
 
 // Add multiple functions
-MyState.addFunctionToRenderer([
+MyState.addToRenderer([
   doSomethingElse,
   beAwesome
 ])
@@ -178,4 +196,4 @@ Since I used it in multiple components, I had to copy it over and over to the po
 ## Todo
 
 * [ ] Bind relations between states and functions to allow specific rendering
-* [ ] Allow usage outside of ES6 via CommonJS
+* [x] ~~Allow usage outside of ES6 via CommonJS~~

@@ -1,6 +1,6 @@
 export default class StateHandler {
   constructor (initialState = false, initialFn = false) {
-    this.state = initialState || {}
+    this._state = initialState || {}
     this.functions = []
 
     if (initialFn) {
@@ -8,18 +8,27 @@ export default class StateHandler {
     }
   }
 
-  setState (newState) {
-    Object.assign(this.state, newState)
-    this.renderNewState()
+  set (newState) {
+    Object.assign(this._state, newState)
+    this.render()
   }
 
-  renderNewState () {
+  get (key = false) {
+    if (!key) {
+      return this._state
+    }
+
+    const value = (this._state[key]) ? this._state[key] : false
+    return value
+  }
+
+  render () {
     for (const fn of this.functions) {
       fn()
     }
   }
 
-  addFunctionToRenderer (fn = false) {
+  addToRenderer (fn = false) {
     if (!fn && typeof fn !== 'function' && typeof fn !== 'object') {
       console.error('Please provide a function or an array of functions to add them to the renderer')
       return false
