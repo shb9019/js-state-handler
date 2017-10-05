@@ -2,6 +2,8 @@
 
 > A simple state handler with rendering functionality
 
+### [Demo](https://bdbch.github.io/js-state-handler/)
+
 # Installation
 
 JS State Handler can be installed via npm
