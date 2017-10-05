@@ -1,4 +1,4 @@
-export default class StateHandler {
+class StateHandler {
   constructor (initialState = false, initialFn = false) {
     this._state = initialState || {}
     this.functions = []
@@ -18,7 +18,7 @@ export default class StateHandler {
       return this._state
     }
 
-    const value = (this._state[key]) ? this._state[key] : false
+    const value = (this._state[key] !== undefined) ? this._state[key] : false
     return value
   }
 
@@ -48,3 +48,5 @@ export default class StateHandler {
     }
   }
 }
+
+module.exports = StateHandler

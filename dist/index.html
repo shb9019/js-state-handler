@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Counter Demo</h1>
+  <hr />
+  <pre id="current-state" style="padding: 8px; min-height: 150px; font-family: monospace; background: #f3f3f3; border: 1px solid #eee; margin-bottom: 3em; display: block; max-width: 650px; width: 100%; white-space: normal; line-height: 2;"></pre>
+  <ul id="persons"></ul>
+  <div id="loader-text"></div>
+  <div id="counter-target"></div>
+  <div>
+    <button onclick="decreaseCounter()">-</button>
+    <button onclick="increaseCounter()">+</button>
+    <button onclick="toggleLoading()">Load</button>
+    <br />
+    <input type="text" id="newName" />
+    <button onclick="addPerson()">Add Person</button>
+  </div>
+
+  <script src="./StateHandler.js"></script>
+  <script>
+    var currentState = document.getElementById('current-state')
+    var counterTarget = document.getElementById('counter-target')
+    var loaderText = document.getElementById('loader-text')
+    var personList = document.getElementById('persons')
+    var newName = document.getElementById('newName')
+
+    var GlobalState = new StateHandler({
+      count: 0,
+      loading: false,
+      persons: [{
+        name: "Markus"
+      }, {
+        name: "Peter"
+      }, {
+        name: "Anna"
+      }]
+    }, [
+      renderCounter,
+      renderLoadingText,
+      renderCurrentState,
+      renderPersons
+    ])
+    GlobalState.render()
+
+    var decreaseCounter = function () {
+      var count = GlobalState.get('count')
+      GlobalState.set({
+        count: count - 1
+      })
+    }
+
+    var increaseCounter = function () {
+      var count = GlobalState.get('count')
+      GlobalState.set({
+        count: count + 1
+      })
+    }
+
+    var toggleLoading = function () {
+      var loading = GlobalState.get('loading')
+      GlobalState.set({
+        loading: (loading) ? false : true
+      })
+    }
+
+    var addPerson = function () {
+      var name = newName.value
+      if (name.length > 0) {
+        var personArray = GlobalState._state.persons
+        personArray.push({
+          name: name
+        })
+        GlobalState.set({
+          persons: personArray
+        })
+      }
+    }
+
+    function renderCounter () {
+      var count = GlobalState.get('count')
+      counterTarget.innerHTML = count
+    }
+
+    function renderLoadingText () {
+      var isLoading = GlobalState.get('loading')
+      if (isLoading) {
+        loaderText.innerHTML = 'Loading ...'
+      } else {
+        loaderText.innerHTML = ''
+      }
+    }
+
+    function renderCurrentState () {
+      var state = GlobalState.get()
+      currentState.innerHTML = JSON.stringify(state)
+    }
+
+    function renderPersons () {
+      var persons = GlobalState.get('persons')
+      var list = ''
+      for (person of persons) {
+        list += '<li>' + person.name + '</li>'
+      }
+
+      personList.innerHTML = list
+    }
+  </script>
+</body>
+</html>
