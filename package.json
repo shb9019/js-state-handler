@@ -5,7 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "compile": "npm run transpile-default && npm run transpile-min",
-    "transpile-default": "babel src/StateHandler.js --plugins transform-es2015-modules-umd --presets es2015,stage-0 --out-file dist/StateHandler.js",
+    "transpile-default": "babel src/StateHandler.js --plugins transform-es2015-modules-umd --presets es2015,stage-0 --out-file dist/StateHandler.js && babel src/StateHandler.js --plugins transform-es2015-modules-umd --presets es2015,stage-0 --out-file docs/StateHandler.js",
     "transpile-min": "babel src/StateHandler.js --plugins transform-es2015-modules-umd --presets es2015,stage-0,minify --out-file dist/StateHandler.min.js",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
